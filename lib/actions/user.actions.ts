@@ -1,5 +1,3 @@
-"user server";
-
 import { CreateUserParams, UpdateUserParams } from "@/types";
 import { handleError } from "../utils";
 import User from "../database/models/event.model";
