@@ -15,6 +15,6 @@ export const connectToDatabase = async () => {
     });
 
   cashed.conn = await cashed.promise;
-  
+
   return cashed.conn;
 };
