@@ -1,10 +1,16 @@
+  import Collection from "@/components/shared/Collection";
 import { Button } from "@/components/ui/button";
+import { getAllEvents } from "@/lib/actions/event.action";
+
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Home = async () => {
+
+      const AllEvents = await getAllEvents({query:"",category:"",page:1,limit:6});
+
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 xl:pl-10 md:py-10">
@@ -38,12 +44,21 @@ const page = () => {
           Trusted By <br /> Thousands of Events
         </h2>
         <div className="flex w-full flex-col gap-5 md:flex-row">
-          Search
-          Category Filter
+          Search Category Filter
         </div>
+
+        <Collection
+          data={AllEvents?.data}
+          emptyTitle="No Events Found"
+          emptyStateSubtext="Come back later"
+          collectionType="All_Events"
+          limit={6}
+          page={1}
+          totalPages={2}
+        />
       </section>
     </>
   );
 };
 
-export default page;
+export default Home;
