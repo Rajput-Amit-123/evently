@@ -10,13 +10,8 @@ import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import React from "react";
 
-const EventDetails = async ({
-  params: { id },
-  searchParams,
-}: SearchParamProps) => {
+const EventDetails = async ({params: { id },searchParams,}: SearchParamProps) => {
   const event = await getEventById(id);
-  const { sessionClaims } = auth();
-  const userId = sessionClaims?.userId as string;
 
   const RelatedEvents = await getRelatedEventsByCategory({
     categoryId: event.category._id,
@@ -106,9 +101,9 @@ const EventDetails = async ({
           emptyTitle="No Events Found"
           emptyStateSubtext="Come back later"
           collectionType="All_Events"
-          limit={6}
-          page={1}
-          totalPages={2}
+          limit={3}
+          page={searchParams?.page as string}
+          totalPages={RelatedEvents?.totalPages}
         />
       </section>
     </>
